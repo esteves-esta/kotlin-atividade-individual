@@ -1,5 +1,6 @@
 package com.fernanda.atividade
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun calcular(component: View){
-
+        resultado.setTextColor(Color.BLACK);
         var nota1 = campoNota1.text.toString()
         var nota2 = campoNota2.text.toString()
 
@@ -27,8 +28,18 @@ class MainActivity : AppCompatActivity() {
         val validado2 = if (validado1) validar(nota2, "Nota da integrada") else false
 
         if(validado1 && validado2){
-            val final = (nota1.toInt() * 0.4) + (nota2.toInt() * 0.6)
+            val final = Math.floor((nota1.toInt() * 0.4) + (nota2.toInt() * 0.6))
+
             resultado.text = "Resultado: ${campoNome.text} sua nota final é $final"
+
+            if(final < 7) {
+                resultado.setTextColor(Color.RED);
+            } else if (final < 9) {
+                resultado.setTextColor(Color.BLUE);
+            } else {
+                resultado.setTextColor(Color.GREEN);
+            }
+
         }
     }
 
